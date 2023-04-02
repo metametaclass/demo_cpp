@@ -16,6 +16,8 @@ target_sources(test_cpp_app
         test_class.cpp
         call_guard.h
         call_guard.cpp
+        task_queue.cpp
+        task_queue.h
         main.cpp
 )
 

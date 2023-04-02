@@ -18,9 +18,15 @@ public:
     // move constructor
     TestClass(TestClass&& t) noexcept;
 
+    // copy assignment 
+    TestClass& operator=(const TestClass&);
+
+    // move assigment
+    TestClass& operator=(TestClass&&) noexcept;
+
     ~TestClass();
 
-    void run(const std::string& comment);
+    void run(const std::string& comment) const;
 
     void set_name(const std::string& new_name);
 
