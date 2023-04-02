@@ -14,6 +14,8 @@ target_sources(test_cpp_app
     PRIVATE
         test_class.h
         test_class.cpp
+        call_guard.h
+        call_guard.cpp
         main.cpp
 )
 

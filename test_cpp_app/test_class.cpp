@@ -7,7 +7,7 @@
 TestClass::TestClass()
     : TestClass("default")
 {
-    std::cout << "TestClass::TestClass() default constructor body" << std::endl;
+    std::cout << "TestClass::TestClass() default constructor called" << std::endl;
 }
 
 TestClass::TestClass(const std::string& name)
@@ -16,6 +16,36 @@ TestClass::TestClass(const std::string& name)
 {
     std::cout << std::format("TestClass::TestClass({})", name) << std::endl;
 }
+
+TestClass::TestClass(TestClass& t) 
+    : mFixedName(t.mFixedName)
+    , mName(t.mName)
+{
+    std::cout << std::format("TestClass::TestClass({},{}) copy constructor called",mFixedName,mName) << std::endl;
+}
+
+TestClass::TestClass(const TestClass& t)
+    : mFixedName(t.mFixedName)
+    , mName(t.mName)
+{
+    std::cout << std::format("TestClass::TestClass({},{}) const copy constructor called", mFixedName, mName) << std::endl;
+}
+
+TestClass::TestClass(TestClass&& t) noexcept
+    : mFixedName(std::move(t.mFixedName))
+    // : mFixedName("moved:" + t.mFixedName)
+    , mName(std::move(t.mName))
+{
+    std::cout << std::format("TestClass::TestClass({},{}) move constructor called", mFixedName, mName) << std::endl;
+}
+
+
+TestClass::~TestClass()
+{
+    std::cout << std::format("TestClass::~TestClass({}, {})", mFixedName, mName) << std::endl;
+}
+
+
 
 void TestClass::run(const std::string& comment)
 {
@@ -34,7 +64,7 @@ void TestClass::set_name(std::string&& new_name)
     mName = new_name;
 }
 
-TestClass::~TestClass()
+std::string TestClass::get_desc() const
 {
-    std::cout << std::format("TestClass::~TestClass({}, {})", mFixedName, mName) << std::endl;
+    return std::format("TestClass({},{})", mFixedName, mName);
 }
